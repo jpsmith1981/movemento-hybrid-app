@@ -1,6 +1,6 @@
 <ion-view view-title="Account">
-  <ion-content>
-    <ion-list>
+  <ion-content scroll="false">
+<!--     <ion-list>
       <ion-item class="item-toggle">
         Enable Friends
         <label class="toggle">
@@ -10,6 +10,14 @@
           </div>
         </label>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
+    <ui-gmap-google-map center="map.center" zoom="map.zoom">
+<!--       <ui-gmap-marker ng-repeat="m in map.markers" coords="m" icon="m.icon" click="onMarkerClicked(m)" idKey="m.id" options="m.options">
+        <ui-gmap-window ng-cloak  coords="map.infoWindowWithCustomClass.coords" isIconVisibleOnClick="false" options="map.infoWindowWithCustomClass.options">
+                <p>This is an info window at {{ m.latitude | number:4 }}, {{ m.longitude | number:4 }}!</p>
+                <p class="muted">My marker will stay open when the window is popped up!</p>
+        </ui-gmap-window>
+      </ui-gmap-marker> -->
+    </ui-gmap-google-map>
   </ion-content>
 </ion-view>

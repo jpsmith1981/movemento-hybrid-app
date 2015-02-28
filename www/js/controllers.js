@@ -21,8 +21,29 @@ angular.module('starter.controllers', [])
   $scope.friend = Friends.get($stateParams.friendId);
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+.controller('AccountCtrl', function($scope, uiGmapGoogleMapApi) {
+    var markers = [],
+    studioIndex,
+    latlong = {},
+    markerIcon;
+
+  uiGmapGoogleMapApi.then(function(maps) {
+    $scope.googleVersion = maps.version;
+    maps.visualRefresh = true;
+  });
+
+  angular.extend($scope, {
+    map: {
+      disableDefaultUI: true,
+      center: {
+        latitude: 33,
+        longitude: -117
+      },
+      zoom: 8,
+      dragging: false,
+      bounds: {},
+    }
+  });
+
+
 });
