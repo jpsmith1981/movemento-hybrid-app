@@ -18,7 +18,7 @@
 		      </a>
 		      <a class="tab-item" ng-class="{'assertive': liked}" href="#" ng-click="like()">
 		        <i class="icon ion-heart"></i>
-		        9
+		        {{likeCount}}
 		      </a>
 		      <a class="tab-item" href="#">
 		        <i class="icon ion-pricetag"></i>
@@ -37,6 +37,13 @@
 			<button class="button button-block button-stable">
 			  Share a moment here!&nbsp&nbsp<i class="icon ion-location assertive"></i>
 			</button>
+            <button class="button button-block button-balanced" ng-if="(movemento.gift) && (!movemento.gift.redeemed.on)" ng-click="redeem()">
+                Someone left a gift. Claim?
+            </button>
+
+            <button class="button button-block button-energized" ng-if="(movemento.gift) && (movemento.gift.redeemed.on)">
+                This gift has been claimed
+            </button>
 		    <div class="list">
 		    	<div class="item item-divider">
 		          Latest Moments in this spot

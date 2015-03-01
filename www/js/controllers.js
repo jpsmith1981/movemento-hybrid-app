@@ -285,16 +285,40 @@ angular.module('starter.controllers', [])
     .controller('profileMoment', function ($scope, $stateParams, Movemento, userService, likeService) {
         // $scope.friend = Friends.get($stateParams.friendId);
         // $scope.user = Chats.get($stateParams.userId);
+        var user = userService.get()
         var userID = userService.getId();
+
+        $scope.liked = false;
+
+
+        angular.forEach(user.likes, function(like) {
+            if($stateParams.movemento_id == like.movemento_id){
+                $scope.liked= true;
+
+            }
+        });
 
         $scope.like = function(){
             console.log('like');
+
+            if(!$scope.liked){
+                likeService.post( {'movemento_id' : $scope.movemento.id, 'user_id' : userID} );
+                $scope.likeCount ++;
+                $scope.liked = !$scope.liked;
+            }
+
+        }
+
+        $scope.redeem = function(){
+            Movemento.claim();
+
         }
 
         Movemento.show($stateParams.movemento_id)
             .success(function (data) {
                 console.log('Movemento Data', data);
                 $scope.movemento = data;
+                $scope.likeCount = data.likes.length;
             })
             .error(function (data) {
                 console.log("ERROR");

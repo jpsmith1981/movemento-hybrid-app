@@ -115,7 +115,12 @@ angular.module('starter.services', [])
 
         show: function(id) {
             return $http.get(api_url + 'movemento/' + id);
+        },
+        claim: function(id){
+            console.log('Claiming Gift');
         }
+
+
 
     }
 })
@@ -128,7 +133,7 @@ angular.module('starter.services', [])
     return {
         login: function(id) {
             var defer = $q.defer();
-            $http.get('http://107.170.215.238/user/' + id)
+            $http.get(api_url + 'user/' + id)
                 .then(function(response){
                     user = response.data;
                     defer.resolve(response.data);
@@ -151,25 +156,9 @@ angular.module('starter.services', [])
 
 .factory('likeService', function($http, $q) {
 
-
     return {
-        login: function(id) {
-            var defer = $q.defer();
-            $http.get('http://107.170.215.238/user/' + id)
-                .then(function(response){
-                    user = response.data;
-                    defer.resolve(response.data);
-                });
-
-            return defer.promise;
-        },
-
-        get: function(){
-            return user;
-        },
-
-        getId: function() {
-            return user.id;
+        post: function(data){
+            return $http.post(api_url + 'like', data);
         }
 
 
