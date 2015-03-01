@@ -110,4 +110,28 @@ angular.module('starter.services', [])
         }
 
     }
+})
+
+
+.factory('user', function($http, $q) {
+
+    var user = null;
+
+    return {
+        login: function(id) {
+            var defer = $q.defer();
+            $http.get('http://107.170.215.238/user/' + id)
+                .then(function(response){
+                    user = response.data;
+                    defer.resolve(response.data);
+                });
+
+            return defer.promise;
+        },
+        getId: function() {
+            return user.id;
+        }
+
+
+    }
 });
