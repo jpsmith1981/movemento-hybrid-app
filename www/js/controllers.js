@@ -198,15 +198,15 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('MomentNote', function($scope, $stateParams, $ionicModal, Movemento, user) {
+.controller('MomentNote', function($scope, $stateParams, $ionicModal, Movemento, user, $state) {
     // $scope.friend = Friends.get($stateParams.friendId);
     //
 
-    var user = user.get();
+    var User = user.get();
 
     $scope.user = {
-        avatar: 'img/'+user.id+'.jpg',
-        name: user.name
+        avatar: 'img/'+User.id+'.jpg',
+        name: User.name
     }
     $scope.active = false;
     $scope.form_data = {};
@@ -256,7 +256,10 @@ angular.module('starter.controllers', [])
     $scope.post = function(){
         console.log("User", user.getId() );
         $scope.form_data.user_id = user.getId();
-        Movemento.post($scope.form_data);
+        Movemento.post($scope.form_data).success(function(){
+            $state.transitionTo('tab.account');
+        });
+
     }
 
 })
