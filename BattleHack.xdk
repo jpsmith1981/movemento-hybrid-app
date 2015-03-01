@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "",
       "projectGuid": "6be938cf-f75d-4682-b6eb-f6e9c227a25f",
-      "lastModifiedDate": 1425213440694,
+      "lastModifiedDate": 1425229287165,
       "creationDate": 1425151029961
     },
     "sourceDirectory": "www",
@@ -53,7 +53,7 @@
           "android-installLocation": "auto"
         },
         "isActive_": true,
-        "appName_": "BattleHack",
+        "appName_": "Mvmento",
         "appID_": "not.yet.specified",
         "appAccess_": [
           {
@@ -104,15 +104,84 @@
           "ios-configuration": "adhoc"
         },
         "isActive_": true,
-        "appName_": "BattleHack",
+        "appName_": "Mvmento",
         "appID_": "com.battlehack.teamsd",
         "appAccess_": [
           {
             "origin": "*"
           }
         ],
-        "icons_": [],
-        "splashes_": [],
+        "icons_": [
+          {
+            "relPath": "img/BF180.png",
+            "height": 180,
+            "width": 180
+          },
+          {
+            "relPath": "img/BF120.png",
+            "height": 120,
+            "width": 120
+          },
+          {
+            "relPath": "img/BF60.png",
+            "height": 60,
+            "width": 60
+          },
+          {
+            "relPath": "img/BF152.png",
+            "height": 152,
+            "width": 152
+          },
+          {
+            "relPath": "img/BF76.png",
+            "height": 76,
+            "width": 76
+          }
+        ],
+        "splashes_": [
+          {
+            "relPath": "img/flushoutscreen.png",
+            "height": 1334,
+            "width": 750,
+            "orientation": "portrait"
+          },
+          {
+            "relPath": "img/flushoutscreen1242x2208.png",
+            "height": 2208,
+            "width": 1242,
+            "orientation": "portrait"
+          },
+          {
+            "relPath": "img/flushoutscreen640x1136.png",
+            "height": 1136,
+            "width": 640,
+            "orientation": "portrait"
+          },
+          {
+            "relPath": "img/flushoutscreen640x960.png",
+            "height": 960,
+            "width": 640,
+            "orientation": "portrait"
+          },
+          {
+            "relPath": "img/flushoutscreen5.png",
+            "height": 480,
+            "width": 320,
+            "orientation": "portrait"
+          },
+          {
+            "relPath": "img/flushoutscreen6.png",
+            "height": 2008,
+            "width": 1536,
+            "orientation": "portrait"
+          },
+          {
+            "relPath": "img/flushoutscreen7.png",
+            "height": 1004,
+            "width": 768,
+            "orientation": "portrait"
+          }
+        ],
         "addlPermissions_": "",
         "excludedLibraries_": "",
         "appVersion_": "0.0.1",

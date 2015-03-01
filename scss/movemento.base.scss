@@ -2,10 +2,61 @@ p{
   white-space: normal !important;
 }
 
+.tab-nav.tabs{
+    background-color:black;
+    color:white;
+}
+
 .tab-item.active{
   color:green;
 }
 
+.tab-title{
+  display:none;
+}
+
 .angular-google-map-container {
 	height: 80vh; 
+}
+
+.icon-home{
+  background-image: url(../img/icon-home.png);
+  background-size: 48px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-save{
+  background-image: url(../img/icon-save.png);
+  background-size: 48px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+
+.icon-notifications{
+  background-image: url(../img/icon-notifications.png);
+  background-size: 48px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+
+.icon-profile{
+  background-image: url(../img/icon-profile.png);
+  background-size: 48px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+
+.icon-movemento{
+  position:fixed;
+  bottom:0px;
+  left:50%;
+  margin-left:-25px;
+  z-index:999;
+  width:50px;
+  height: 50px;
+
 }
