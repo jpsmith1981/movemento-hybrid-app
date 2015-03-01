@@ -39,6 +39,7 @@ angular.module('starter.controllers', [])
     charityMarker,
     publicMarker,
     friendMarker,
+    personalMarker,
     markerIcon;
 
   // $scope.showPopup = function() {
@@ -84,7 +85,9 @@ angular.module('starter.controllers', [])
     charityMarker = new maps.MarkerImage("img/charity_pin.png", null, null, null, new google.maps.Size(24,36));
     publicMarker = new maps.MarkerImage("img/public_pin.png", null, null, null, new google.maps.Size(24,36));
     friendMarker = new maps.MarkerImage("img/friend_pin.png", null, null, null, new google.maps.Size(24,36));
+    personalMarker = new maps.MarkerImage("img/personal_pin.png", null, null, null, new google.maps.Size(24,36));
     
+
     $http.get('http://107.170.215.238/movemento/?user_id=2')
     .success(function (data) {
       console.log(data);
@@ -114,6 +117,10 @@ angular.module('starter.controllers', [])
       case 'friend':
           momentTitle = 'A friend just shared a moment!';
           setMarker = friendMarker;
+          break;
+      case 'mine':
+          momentTitle = 'My moment!';
+          setMarker = personalMarker;
           break;
       default:
           momentTitle = 'Someone just shared a moment!';
