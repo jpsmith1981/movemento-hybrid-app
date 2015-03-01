@@ -130,6 +130,11 @@ angular.module('starter.services', [])
 
             return defer.promise;
         },
+
+        get: function(){
+           return user;
+        },
+
         getId: function() {
             return user.id;
         }

@@ -3,8 +3,12 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope) {})
 
 // LOGIN CONTROLLER HERE
-.controller('LoginCtrl', function($scope) {
+.controller('LoginCtrl', function($scope, user, $state) {
+    $scope.login = function(id){
+        user.login(id);
+        $state.transitionTo('tab.account');
 
+    }
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -201,15 +205,20 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('MomentNote', function($scope, $stateParams, $ionicModal, Movemento) {
+.controller('MomentNote', function($scope, $stateParams, $ionicModal, Movemento, user) {
     // $scope.friend = Friends.get($stateParams.friendId);
+    //
+
+    var user = user.get();
+
     $scope.user = {
-        avatar: 'img/ben.jpeg',
-        name: 'Ben Canales'
+        avatar: 'img/'+user.id+'.jpg',
+        name: user.name
     }
     $scope.active = false;
     $scope.form_data = {};
     $scope.note = '';
+
     navigator.geolocation.getCurrentPosition(function(data){
         console.log('data', data.coords.latitude);
         console.log('data', data.coords.longitude);
@@ -252,7 +261,8 @@ angular.module('starter.controllers', [])
     });
 
     $scope.post = function(){
-        $scope.form_data.user_id = 3;
+        console.log("User", user.getId() );
+        $scope.form_data.user_id = user.getId();
         Movemento.post($scope.form_data);
     }
 
