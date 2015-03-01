@@ -16,11 +16,5 @@ angular.module('starter.directives', [])
             }
         }
     }
-})
-
-
-.directive('myCustomer', function() {
-    return {
-        template: '<h1>Here</h1>'
-    };
 });
+
