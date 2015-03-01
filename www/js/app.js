@@ -123,7 +123,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: 'MomentNote'
       }
     }
-  });
+  })
+  .state('moments.profile', {
+      url: '/profile/:userId',
+      views: {
+        'moments': {
+          templateUrl: 'templates/moments/moment-profile.html',
+          controller: 'profileMoment'
+        }
+      }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/account');

@@ -95,19 +95,19 @@ angular.module('starter.controllers', [])
     var momentTitle;
     switch(moment.type) {
       case 'gift':
-          momentTitle = 'A charity ';
+          momentTitle = 'Some just left a gift moment! ';
           setMarker = charityMarker;
           break;
       case 'general':
-          momentTitle = 'Someone ';
+          momentTitle = 'Someone just shared a moment!';
           setMarker = publicMarker;
           break;
       case 'friend':
-          momentTitle = 'A friend ';
+          momentTitle = 'A friend just shared a moment!';
           setMarker = friendMarker;
           break;
       default:
-          momentTitle = 'Someone ';
+          momentTitle = 'Someone just shared a moment!';
           setMarker = publicMarker;
     }
     return {
@@ -227,4 +227,16 @@ angular.module('starter.controllers', [])
 .controller('createMoment', function($scope, $stateParams) {
   // $scope.friend = Friends.get($stateParams.friendId);
 
+})
+.controller('profileMoment', function($scope, $stateParams, Chats) {
+  // $scope.friend = Friends.get($stateParams.friendId);
+  // $scope.user = Chats.get($stateParams.userId);
+  Chats.get($stateParams.userId)
+  .success(function(data){
+    $scope.user = data;
+    console.log(data);
+  })
+  .error(function(data){
+    console.log("ERROR");
+  });
 });
