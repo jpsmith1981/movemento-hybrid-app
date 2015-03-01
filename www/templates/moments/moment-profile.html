@@ -37,11 +37,11 @@
 			<button class="button button-block button-stable">
 			  Share a moment here!&nbsp&nbsp<i class="icon ion-location assertive"></i>
 			</button>
-            <button class="button button-block button-balanced" ng-if="(movemento.gift) && (!movemento.gift.redeemed.on)" ng-click="redeem()">
+            <button class="button button-block button-balanced" ng-if="is_gift()" ng-click="redeem()">
                 Someone left a gift. Claim?
             </button>
 
-            <button class="button button-block button-energized" ng-if="(movemento.gift) && (movemento.gift.redeemed.on)">
+            <button class="button button-block button-energized" ng-if="is_redeemed()">
                 This gift has been claimed
             </button>
 		    <div class="list">

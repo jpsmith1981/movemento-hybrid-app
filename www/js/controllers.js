@@ -225,7 +225,7 @@ angular.module('starter.controllers', [])
         navigator.geolocation.getCurrentPosition(function (data) {
             console.log('data', data.coords.latitude);
             console.log('data', data.coords.longitude);
-            alert("lat: " + data.coords.latitude + ' long: ' + data.coords.longitude);
+            //alert("lat: " + data.coords.latitude + ' long: ' + data.coords.longitude);
             $scope.form_data.latitude = data.coords.latitude;
             $scope.form_data.longitude = data.coords.longitude;
         })
@@ -289,6 +289,11 @@ angular.module('starter.controllers', [])
         var userID = userService.getId();
 
         $scope.liked = false;
+        $scope.movemento = false;
+
+        $scope.isGift = function(){
+
+        }
 
 
         angular.forEach(user.likes, function(like) {
@@ -297,6 +302,26 @@ angular.module('starter.controllers', [])
 
             }
         });
+
+        $scope.is_redeemed = function(){
+
+            if($scope.movemento && $scope.movemento.gift != null && $scope.movemento.gift.redeemed_on != null){
+                console.log('redeemed true');
+                return true;
+
+            }
+            return false;
+        }
+
+        $scope.is_gift = function(){
+
+            if($scope.movemento && $scope.movemento.gift != null && $scope.movemento.gift.redeemed_on == null){
+                console.log('gift true');
+                return true;
+
+            }
+            return false;
+        }
 
         $scope.like = function(){
             console.log('like');
@@ -310,7 +335,10 @@ angular.module('starter.controllers', [])
         }
 
         $scope.redeem = function(){
-            Movemento.claim();
+            Movemento.claim($scope.movemento.gift.id).success(function(data){
+                $scope.movemento = data;
+
+            });
 
         }
 

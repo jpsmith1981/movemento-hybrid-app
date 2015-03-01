@@ -118,6 +118,7 @@ angular.module('starter.services', [])
         },
         claim: function(id){
             console.log('Claiming Gift');
+            return $http.post(api_url + 'gift/' + id, {'_method':'PUT'});
         }
 
 
