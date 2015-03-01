@@ -21,25 +21,130 @@ angular.module('starter.controllers', [])
   $scope.friend = Friends.get($stateParams.friendId);
 })
 
-.controller('AccountCtrl', function($scope, uiGmapGoogleMapApi) {
-  //   var markers = [],
-  //   studioIndex,
-  //   latlong = {},
-  //   markerIcon;
+.controller('AccountCtrl', function($scope, $http, $ionicBackdrop, $ionicPopup, uiGmapGoogleMapApi) {
+    var markers = [],
+    studioIndex,
+    latlong = {},
+    lats = 34.018357,
+    longs = -118.486918,
+    charityMarker,
+    publicMarker,
+    friendMarker,
+    markerIcon;
+
+  $scope.showPopup = function() {
+    $scope.data = {}
+
+  // An elaborate, custom popup
+    var myPopup = $ionicPopup.show({
+    template: 'templates/moments/moment-profile.html',
+    // title: 'Moment',
+    subTitle: 'This moment was shared <span style="font-weight:bold;">1 min</span> ago.',
+    scope: $scope,
+    buttons: [
+      { text: 'Cancel' },
+      {
+        text: '<b>Save</b>',
+        type: 'button-positive',
+        // onTap: function(e) {
+        //   if (!$scope.data.wifi) {
+        //     //don't allow the user to close unless he enters wifi password
+        //     e.preventDefault();
+        //   } else {
+        //     return $scope.data.wifi;
+        //   }
+        // }
+      }
+    ]
+  });
+  };
+
+    $scope.action = function() {
+      console.log("ACTION");
+      $ionicBackdrop.retain();
+      $timeout(function() {
+        $ionicBackdrop.release();
+      }, 1000);
+    };
 
   uiGmapGoogleMapApi.then(function(maps) {
     $scope.googleVersion = maps.version;
     maps.visualRefresh = true;
 
-    $scope.marker = {
-      id: 0,
-      coords: {
-        latitude: 34.018357,
-        longitude: -118.486918
-      },
-      options: { draggable: true }
-    };
+    charityMarker = new maps.MarkerImage("img/charity_pin.png", null, null, null, new google.maps.Size(24,36));
+    publicMarker = new maps.MarkerImage("img/public_pin.png", null, null, null, new google.maps.Size(24,36));
+    friendMarker = new maps.MarkerImage("img/friend_pin.png", null, null, null, new google.maps.Size(24,36));
+    
+    $http.get('http://107.170.215.238/movemento/?user_id=2')
+    .success(function (data) {
+      console.log(data);
+      for (var momentIndex = 0; momentIndex < data.length; momentIndex += 1) {
+
+          markers.push(createMarker(data[momentIndex]));
+          console.log("Created Marker: ", momentIndex);
+      }
+    })
+    .error(function(data){
+
+    });
   });
+
+  var createMarker = function (moment) {
+    var setMarker;
+    var momentTitle;
+    switch(moment.type) {
+      case 'gift':
+          momentTitle = 'A charity ';
+          setMarker = charityMarker;
+          break;
+      case 'general':
+          momentTitle = 'Someone ';
+          setMarker = publicMarker;
+          break;
+      case 'friend':
+          momentTitle = 'A friend ';
+          setMarker = friendMarker;
+          break;
+      default:
+          momentTitle = 'Someone ';
+          setMarker = publicMarker;
+    }
+    return {
+      name: moment.user.name,
+      title: momentTitle,
+      studioID: moment.id,
+      distance: moment.distance,
+      avatar: moment.avatar,
+      showWindow: false,
+      id: moment.id,
+      // coords: {
+      //     latitude: studio.latitude,
+      //     longitude: studio.longitude
+      // },
+      latitude: moment.latitude,
+      longitude: moment.longitude,
+      icon: setMarker,
+      options: {
+        animation: 4,
+        labelContent: ' ',
+        // labelAnchor: "22 0",
+        labelClass: "marker-labels"
+      },
+      onClicked : function () {
+        console.log("onCLicked");
+        onMarkerClicked(this);
+      },
+      closeClick : function () {
+          this.showWindow = false;
+      }
+    };
+  };
+
+  var onMarkerClicked = function (marker) {
+    console.log("onMarkerClicked");
+    marker.showWindow = true;
+    $scope.$apply();
+  };
 
   angular.extend($scope, {
     map: {
@@ -48,9 +153,37 @@ angular.module('starter.controllers', [])
         latitude: 34.018357,
         longitude: -118.486918
       },
-      zoom: 17,
       dragging: false,
-      bounds: {}
+      bounds: {},
+      markers: markers,
+      zoom: 16,
+      events: {
+//This turns of events and hits against scope from gMap events this does speed things up
+// adding a blacklist for watching your controller scope should even be better
+//        blacklist: ['drag', 'dragend','dragstart','zoom_changed', 'center_changed'],
+        tilesloaded: function (map, eventName, originalEventArgs) {
+        },
+        click: function (mapModel, eventName, originalEventArgs) {
+          // 'this' is the directive's scope
+          $log.info("user defined event: " + eventName, mapModel, originalEventArgs);
+          console.log("click");
+          var e = originalEventArgs[0];
+          var lat = e.latLng.lat(),
+            lon = e.latLng.lng();
+          $scope.map.clickedMarker = {
+            id: 0,
+            options: {
+              labelContent: 'You clicked here ' + 'lat: ' + lat + ' lon: ' + lon,
+              labelClass: "marker-labels",
+              labelAnchor:"50 0"
+            },
+            latitude: lat,
+            longitude: lon
+          };
+          //scope apply required because this event handler is outside of the angular domain
+          $scope.$apply();
+        },
+      }
     }
   });
 
