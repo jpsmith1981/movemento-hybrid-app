@@ -40,6 +40,7 @@ angular.module('starter.controllers', [])
     publicMarker,
     friendMarker,
     personalMarker,
+    indicatorMarker,
     markerIcon;
 
   $scope.action = function() {
@@ -58,7 +59,16 @@ angular.module('starter.controllers', [])
     publicMarker = new maps.MarkerImage("img/public_pin.png", null, null, null, new google.maps.Size(24,36));
     friendMarker = new maps.MarkerImage("img/friend_pin.png", null, null, null, new google.maps.Size(24,36));
     personalMarker = new maps.MarkerImage("img/personal_pin.png", null, null, null, new google.maps.Size(24,36));
-    
+    indicatorMarker = new maps.MarkerImage("img/nav_dot.png", null, null, null, new google.maps.Size(20,20));
+    $scope.indicator = {
+      id: 0,
+      coords: {
+        latitude: 34.018357,
+        longitude: -118.486918
+      },
+      icon: indicatorMarker,
+      options: { draggable: false }
+    };
 
     $http.get('http://107.170.215.238/movemento/?user_id=2')
     .success(function (data) {
@@ -134,6 +144,7 @@ angular.module('starter.controllers', [])
     marker.showWindow = true;
     $scope.$apply();
   };
+
 
 
   angular.extend($scope, {
@@ -241,8 +252,8 @@ angular.module('starter.controllers', [])
         Movemento.post($scope.form_data).success(function(){
             $state.transitionTo('tab.account');
         });
-
     }
+
 
 })
 .controller('createMoment', function($scope, $stateParams) {
