@@ -32,41 +32,41 @@ angular.module('starter.controllers', [])
     friendMarker,
     markerIcon;
 
-  $scope.showPopup = function() {
-    $scope.data = {}
-    console.log("CLICKED");
-  // An elaborate, custom popup
-    var myPopup = $ionicPopup.show({
-    template: 'templates/moments/moment-profile.html',
-    // title: 'Moment',
-    subTitle: 'This moment was shared <span style="font-weight:bold;">1 min</span> ago.',
-    scope: $scope,
-    buttons: [
-      { text: 'Cancel' },
-      {
-        text: '<b>Save</b>',
-        type: 'button-positive',
-        // onTap: function(e) {
-        //   if (!$scope.data.wifi) {
-        //     //don't allow the user to close unless he enters wifi password
-        //     e.preventDefault();
-        //   } else {
-        //     return $scope.data.wifi;
-        //   }
-        // }
-      }
-    ]
-  });
-    $scope.$apply();
-  };
+  // $scope.showPopup = function() {
+  //   $scope.data = {}
+  //   console.log("CLICKED");
+  // // An elaborate, custom popup
+  //   var myPopup = $ionicPopup.show({
+  //   template: 'templates/moments/moment-profile.html',
+  //   // title: 'Moment',
+  //   subTitle: 'This moment was shared <span style="font-weight:bold;">1 min</span> ago.',
+  //   scope: $scope,
+  //   buttons: [
+  //     { text: 'Cancel' },
+  //     {
+  //       text: '<b>Save</b>',
+  //       type: 'button-positive',
+  //       // onTap: function(e) {
+  //       //   if (!$scope.data.wifi) {
+  //       //     //don't allow the user to close unless he enters wifi password
+  //       //     e.preventDefault();
+  //       //   } else {
+  //       //     return $scope.data.wifi;
+  //       //   }
+  //       // }
+  //     }
+  //   ]
+  //   });
+  //   $scope.$apply();
+  // };
 
-    $scope.action = function() {
-      console.log("ACTION");
-      $ionicBackdrop.retain();
-      $timeout(function() {
-        $ionicBackdrop.release();
-      }, 1000);
-    };
+  $scope.action = function() {
+    console.log("ACTION");
+    $ionicBackdrop.retain();
+    $timeout(function() {
+      $ionicBackdrop.release();
+    }, 1000);
+  };
 
   uiGmapGoogleMapApi.then(function(maps) {
     $scope.googleVersion = maps.version;
@@ -183,45 +183,66 @@ angular.module('starter.controllers', [])
           };
           //scope apply required because this event handler is outside of the angular domain
           $scope.$apply();
-        },
+        }
       }
     }
   });
-
-
 })
 
-.controller('MomentNote', function($scope, $stateParams, $ionicModal) {
-  // $scope.friend = Friends.get($stateParams.friendId);
-  $scope.user = {
-    avatar: 'img/ben.jpeg',
-    name: 'Ben Canales'
-  }
+.controller('MomentNote', function($scope, $stateParams, $ionicModal, Movemento) {
+    // $scope.friend = Friends.get($stateParams.friendId);
+    $scope.user = {
+        avatar: 'img/ben.jpeg',
+        name: 'Ben Canales'
+    }
+    $scope.active = false;
+    $scope.form_data = {};
+    $scope.note = '';
+    navigator.geolocation.getCurrentPosition(function(data){
+        console.log('data', data.coords.latitude);
+        console.log('data', data.coords.longitude);
+        $scope.form_data.latitude = data.coords.latitude;
+        $scope.form_data.longitude = data.coords.longitude;
+    })
 
-  $ionicModal.fromTemplateUrl('templates/payment/payment.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-  $scope.openModal = function() {
-    $scope.modal.show();
-  };
-  $scope.closeModal = function() {
-    $scope.modal.hide();
-  };
-  //Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.modal.remove();
-  });
-  // Execute action on hide modal
-  $scope.$on('modal.hidden', function() {
-    // Execute action
-  });
-  // Execute action on remove modal
-  $scope.$on('modal.removed', function() {
-    // Execute action
-  });
+    $ionicModal.fromTemplateUrl('templates/payment/payment.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+    $scope.openModal = function() {
+        $scope.modal.show();
+    };
+    $scope.closeModal = function() {
+        $scope.modal.hide();
+    };
+    //Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+        $scope.modal.remove();
+    });
+    // Execute action on hide modal
+    $scope.$on('modal.hidden', function() {
+        // Execute action
+    });
+    // Execute action on remove modal
+    $scope.$on('modal.removed', function() {
+        // Execute action
+    });
+
+    $scope.$on('go', function () {
+        $scope.form_data.gift = true;
+        console.log('Form Data', $scope.form_data);
+        $scope.modal.hide();
+        $scope.active = true;
+
+
+    });
+
+    $scope.post = function(){
+        $scope.form_data.user_id = 3;
+        Movemento.post($scope.form_data);
+    }
 
 })
 .controller('createMoment', function($scope, $stateParams) {
