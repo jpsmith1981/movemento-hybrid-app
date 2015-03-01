@@ -269,7 +269,7 @@ angular.module('starter.controllers', [])
             console.log("User", userService.getId());
             $scope.form_data.user_id = userService.getId();
             Movemento.post($scope.form_data).success(function (data) {
-                if (data.trim() == "missing data")
+                if (data == "missing data")
                     alert('Missing Data');
                 else
                     $state.transitionTo('tab.account');
