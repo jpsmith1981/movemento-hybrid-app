@@ -7015,5 +7015,12 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+p {
+  white-space: normal !important; }
+
 .angular-google-map-container {
   height: 80vh; }
+
+.modal-gift iframe {
+  margin: 12px auto;
+  display: block; }
