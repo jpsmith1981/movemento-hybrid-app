@@ -1,0 +1,36 @@
+<ion-view>
+  <ion-content scroll="false">
+    <ion-list>
+      <ion-item class="item-avatar" type="item-text-wrap">
+        <img ng-src="{{user.avatar}}">
+        <h2>{{user.name}}</h2>
+      </ion-item>
+    </ion-list>
+    <input type="text" placeholder="Title"></input>
+    <hr>
+    <textarea placeholder="Note..."></textarea>
+    <div class="item tabs tabs-secondary tabs-icon-left">
+      <a class="tab-item" href="#">
+        <i class="icon ion-pricetag"></i>
+        Tag
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-social-facebook"></i>
+        FB
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-social-twitter"></i>
+        Twitter
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-camera"></i>
+        Add Photo
+      </a>
+      <a class="tab-item" href="#" ng-click="openModal()">
+        <i class="icon ion-cash"></i>
+        Add Money
+      </a>
+    </div>
+
+  </ion-content>
+</ion-view>
