@@ -263,8 +263,11 @@ angular.module('starter.controllers', [])
     $scope.post = function(){
         console.log("User", user.getId() );
         $scope.form_data.user_id = user.getId();
-        Movemento.post($scope.form_data).success(function(){
-            $state.transitionTo('tab.account');
+        Movemento.post($scope.form_data).success(function(data){
+            if(data.trim() == "missing data")
+                alert('Missing Data');
+            else
+                $state.transitionTo('tab.account');
         });
 
     }
