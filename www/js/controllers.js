@@ -34,7 +34,7 @@ angular.module('starter.controllers', [])
 
   $scope.showPopup = function() {
     $scope.data = {}
-
+    console.log("CLICKED");
   // An elaborate, custom popup
     var myPopup = $ionicPopup.show({
     template: 'templates/moments/moment-profile.html',
@@ -57,6 +57,7 @@ angular.module('starter.controllers', [])
       }
     ]
   });
+    $scope.$apply();
   };
 
     $scope.action = function() {
