@@ -7018,6 +7018,9 @@ a.button {
 p {
   white-space: normal !important; }
 
+.tab-item.active {
+  color: green; }
+
 .angular-google-map-container {
   height: 80vh; }
 

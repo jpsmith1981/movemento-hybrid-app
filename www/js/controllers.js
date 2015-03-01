@@ -191,12 +191,21 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('MomentNote', function($scope, $stateParams, $ionicModal) {
+    .controller('MomentNote', function($scope, $stateParams, $ionicModal, Movemento) {
         // $scope.friend = Friends.get($stateParams.friendId);
         $scope.user = {
             avatar: 'img/ben.jpeg',
             name: 'Ben Canales'
         }
+        $scope.active = false;
+        $scope.form_data = {};
+        $scope.note = '';
+        navigator.geolocation.getCurrentPosition(function(data){
+            console.log('data', data.coords.latitude);
+            console.log('data', data.coords.longitude);
+            $scope.form_data.latitude = data.coords.latitude;
+            $scope.form_data.longitude = data.coords.longitude;
+        })
 
         $ionicModal.fromTemplateUrl('templates/payment/payment.html', {
             scope: $scope,
@@ -222,6 +231,20 @@ angular.module('starter.controllers', [])
         $scope.$on('modal.removed', function() {
             // Execute action
         });
+
+        $scope.$on('go', function () {
+            $scope.form_data.gift = true;
+            console.log('Form Data', $scope.form_data);
+            $scope.modal.hide();
+            $scope.active = true;
+
+
+        });
+
+        $scope.post = function(){
+            $scope.form_data.user_id = 3;
+            Movemento.post($scope.form_data);
+        }
 
     })
     .controller('createMoment', function($scope, $stateParams) {

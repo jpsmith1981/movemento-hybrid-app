@@ -1,4 +1,17 @@
+
+
 <ion-view>
+
+
+
+        <ion-nav-buttons side="right">
+            <button class="button" ng-click="post()">
+                Post!
+            </button>
+        </ion-nav-buttons>
+
+
+
   <ion-content scroll="false">
     <ion-list>
       <ion-item class="item-avatar" type="item-text-wrap">
@@ -8,13 +21,14 @@
     </ion-list>
 
     <hr>
-    <textarea placeholder="Note..."></textarea>
+
+    <textarea placeholder="Note..." ng-model="form_data.note"></textarea>
     <div class="item tabs tabs-secondary tabs-icon-left">
       <a class="tab-item" href="#">
         <i class="icon ion-camera"></i>
         Add Photo
       </a>
-      <a class="tab-item" href="#" ng-click="openModal()">
+      <a class="tab-item" href="#" ng-click="openModal()" ng-class="{'active':active}">
         <i class="icon ion-cube"></i>
         Add Gift
       </a>
