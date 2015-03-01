@@ -139,7 +139,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
   .state('moments.profile', {
-      url: '/profile/:userId',
+      url: '/profile/:movemento_id',
       views: {
         'moments': {
           templateUrl: 'templates/moments/moment-profile.html',
