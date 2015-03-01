@@ -4,9 +4,21 @@
 <!--To change the contents of this file, see the documentation on the intelxdk.config.additions.xml file.-->
 <intelxdk:version value="1.0"/>
 <intelxdk:cordova-cli version="4.1.2"/>
-<name>BattleHack</name>
+<name>Mvmento</name>
 <content src="index.html"/>
 <access origin="*"/>
+<icon platform="ios" src="img/BF180.png" width="180" height="180"/>
+<icon platform="ios" src="img/BF120.png" width="120" height="120"/>
+<icon platform="ios" src="img/BF60.png" width="60" height="60"/>
+<icon platform="ios" src="img/BF152.png" width="152" height="152"/>
+<icon platform="ios" src="img/BF76.png" width="76" height="76"/>
+<splash platform="ios" src="img/flushoutscreen.png" width="750" height="1334" orientation="portrait"/>
+<splash platform="ios" src="img/flushoutscreen1242x2208.png" width="1242" height="2208" orientation="portrait"/>
+<splash platform="ios" src="img/flushoutscreen640x1136.png" width="640" height="1136" orientation="portrait"/>
+<splash platform="ios" src="img/flushoutscreen640x960.png" width="640" height="960" orientation="portrait"/>
+<splash platform="ios" src="img/flushoutscreen5.png" width="320" height="480" orientation="portrait"/>
+<splash platform="ios" src="img/flushoutscreen6.png" width="1536" height="2008" orientation="portrait"/>
+<splash platform="ios" src="img/flushoutscreen7.png" width="768" height="1004" orientation="portrait"/>
 <intelxdk:plugin intelxdk:name="Device" intelxdk:value="org.apache.cordova.device" intelxdk:version="0.2.13"/>
 <intelxdk:plugin intelxdk:name="SplashScreen" intelxdk:value="org.apache.cordova.splashscreen" intelxdk:version="0.3.5"/>
 <intelxdk:plugin intelxdk:name="Geolocation" intelxdk:value="org.apache.cordova.geolocation" intelxdk:version="0.3.11"/>

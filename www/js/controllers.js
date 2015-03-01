@@ -225,7 +225,7 @@ angular.module('starter.controllers', [])
         navigator.geolocation.getCurrentPosition(function (data) {
             console.log('data', data.coords.latitude);
             console.log('data', data.coords.longitude);
-            alert("lat: " + data.coords.latitude + ' long: ' + data.coords.longitude);
+            // alert("lat: " + data.coords.latitude + ' long: ' + data.coords.longitude);
             $scope.form_data.latitude = data.coords.latitude;
             $scope.form_data.longitude = data.coords.longitude;
         })
