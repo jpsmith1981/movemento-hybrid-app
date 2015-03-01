@@ -1,28 +1,27 @@
 angular.module('starter.controllers', [])
 
-    .controller('DashCtrl', function ($scope) {
-    })
+    .controller('DashCtrl', function($scope) {})
 
-    .controller('ChatsCtrl', function ($scope, Chats) {
+    .controller('ChatsCtrl', function($scope, Chats) {
         $scope.chats = Chats.all();
-        $scope.remove = function (chat) {
+        $scope.remove = function(chat) {
             Chats.remove(chat);
         }
     })
 
-    .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
+    .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
         $scope.chat = Chats.get($stateParams.chatId);
     })
 
-    .controller('FriendsCtrl', function ($scope, Friends) {
+    .controller('FriendsCtrl', function($scope, Friends) {
         $scope.friends = Friends.all();
     })
 
-    .controller('FriendDetailCtrl', function ($scope, $stateParams, Friends) {
+    .controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
         $scope.friend = Friends.get($stateParams.friendId);
     })
 
-    .controller('AccountCtrl', function ($scope, $http, $ionicBackdrop, $ionicPopup, uiGmapGoogleMapApi) {
+    .controller('AccountCtrl', function($scope, $http, $ionicBackdrop, $ionicPopup, uiGmapGoogleMapApi) {
         var markers = [],
             studioIndex,
             latlong = {},
@@ -33,9 +32,9 @@ angular.module('starter.controllers', [])
             friendMarker,
             markerIcon;
 
-        $scope.showPopup = function () {
+        $scope.showPopup = function() {
             $scope.data = {}
-
+            console.log("CLICKED");
             // An elaborate, custom popup
             var myPopup = $ionicPopup.show({
                 template: 'templates/moments/moment-profile.html',
@@ -43,7 +42,7 @@ angular.module('starter.controllers', [])
                 subTitle: 'This moment was shared <span style="font-weight:bold;">1 min</span> ago.',
                 scope: $scope,
                 buttons: [
-                    {text: 'Cancel'},
+                    { text: 'Cancel' },
                     {
                         text: '<b>Save</b>',
                         type: 'button-positive',
@@ -58,23 +57,24 @@ angular.module('starter.controllers', [])
                     }
                 ]
             });
+            $scope.$apply();
         };
 
-        $scope.action = function () {
+        $scope.action = function() {
             console.log("ACTION");
             $ionicBackdrop.retain();
-            $timeout(function () {
+            $timeout(function() {
                 $ionicBackdrop.release();
             }, 1000);
         };
 
-        uiGmapGoogleMapApi.then(function (maps) {
+        uiGmapGoogleMapApi.then(function(maps) {
             $scope.googleVersion = maps.version;
             maps.visualRefresh = true;
 
-            charityMarker = new maps.MarkerImage("img/charity_pin.png", null, null, null, new google.maps.Size(24, 36));
-            publicMarker = new maps.MarkerImage("img/public_pin.png", null, null, null, new google.maps.Size(24, 36));
-            friendMarker = new maps.MarkerImage("img/friend_pin.png", null, null, null, new google.maps.Size(24, 36));
+            charityMarker = new maps.MarkerImage("img/charity_pin.png", null, null, null, new google.maps.Size(24,36));
+            publicMarker = new maps.MarkerImage("img/public_pin.png", null, null, null, new google.maps.Size(24,36));
+            friendMarker = new maps.MarkerImage("img/friend_pin.png", null, null, null, new google.maps.Size(24,36));
 
             $http.get('http://107.170.215.238/movemento/?user_id=2')
                 .success(function (data) {
@@ -85,7 +85,7 @@ angular.module('starter.controllers', [])
                         console.log("Created Marker: ", momentIndex);
                     }
                 })
-                .error(function (data) {
+                .error(function(data){
 
                 });
         });
@@ -93,7 +93,7 @@ angular.module('starter.controllers', [])
         var createMarker = function (moment) {
             var setMarker;
             var momentTitle;
-            switch (moment.type) {
+            switch(moment.type) {
                 case 'gift':
                     momentTitle = 'A charity ';
                     setMarker = charityMarker;
@@ -131,11 +131,11 @@ angular.module('starter.controllers', [])
                     // labelAnchor: "22 0",
                     labelClass: "marker-labels"
                 },
-                onClicked: function () {
+                onClicked : function () {
                     console.log("onCLicked");
                     onMarkerClicked(this);
                 },
-                closeClick: function () {
+                closeClick : function () {
                     this.showWindow = false;
                 }
             };
@@ -176,7 +176,7 @@ angular.module('starter.controllers', [])
                             options: {
                                 labelContent: 'You clicked here ' + 'lat: ' + lat + ' lon: ' + lon,
                                 labelClass: "marker-labels",
-                                labelAnchor: "50 0"
+                                labelAnchor:"50 0"
                             },
                             latitude: lat,
                             longitude: lon
@@ -191,7 +191,7 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('MomentNote', function ($scope, $stateParams, $ionicModal) {
+    .controller('MomentNote', function($scope, $stateParams, $ionicModal) {
         // $scope.friend = Friends.get($stateParams.friendId);
         $scope.user = {
             avatar: 'img/ben.jpeg',
@@ -201,34 +201,30 @@ angular.module('starter.controllers', [])
         $ionicModal.fromTemplateUrl('templates/payment/payment.html', {
             scope: $scope,
             animation: 'slide-in-up'
-        }).then(function (modal) {
+        }).then(function(modal) {
             $scope.modal = modal;
         });
-        $scope.openModal = function () {
+        $scope.openModal = function() {
             $scope.modal.show();
         };
-        $scope.closeModal = function () {
+        $scope.closeModal = function() {
             $scope.modal.hide();
         };
         //Cleanup the modal when we're done with it!
-        $scope.$on('$destroy', function () {
+        $scope.$on('$destroy', function() {
             $scope.modal.remove();
         });
         // Execute action on hide modal
-        $scope.$on('modal.hidden', function () {
+        $scope.$on('modal.hidden', function() {
             // Execute action
         });
         // Execute action on remove modal
-        $scope.$on('modal.removed', function () {
+        $scope.$on('modal.removed', function() {
             // Execute action
-        });
-        console.log('here');
-        $scope.$on('go', function () {
-            alert('event is clicked')
         });
 
     })
-    .controller('createMoment', function ($scope, $stateParams) {
+    .controller('createMoment', function($scope, $stateParams) {
         // $scope.friend = Friends.get($stateParams.friendId);
 
     });
