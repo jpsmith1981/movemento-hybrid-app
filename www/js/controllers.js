@@ -4,10 +4,11 @@ angular.module('starter.controllers', [])
     })
 
 // LOGIN CONTROLLER HERE
-.controller('LoginCtrl', function ($scope, userService, $state) {
+.controller('LoginCtrl', function ($scope, $location, userService, $state) {
         $scope.login = function (id) {
             userService.login(id);
             $state.transitionTo('tab.account');
+            // $location.path('#/tab/account/'+id);
           }
 })
 
@@ -50,7 +51,7 @@ angular.module('starter.controllers', [])
         $scope.friend = Friends.get($stateParams.friendId);
     })
 
-    .controller('AccountCtrl', function ($scope, $http, $ionicBackdrop, $ionicPopup, $geolocation, uiGmapGoogleMapApi) {
+    .controller('AccountCtrl', function ($scope, $http, $stateParams, $ionicPopup, uiGmapGoogleMapApi, userService) {
         var markers = [],
             studioIndex,
             latlong = {},
@@ -60,20 +61,14 @@ angular.module('starter.controllers', [])
             publicMarker,
             friendMarker,
             personalMarker,
-            markerIcon;
-
-        $scope.action = function () {
-            console.log("ACTION");
-            $ionicBackdrop.retain();
-            $timeout(function () {
-                $ionicBackdrop.release();
-            }, 1000);
-        };
+            markerIcon,
+            userID;
 
         uiGmapGoogleMapApi.then(function (maps) {
             $scope.googleVersion = maps.version;
             maps.visualRefresh = true;
 
+            userID = userService.getId();
             charityMarker = new maps.MarkerImage("img/charity_pin.png", null, null, null, new google.maps.Size(24, 24));
             publicMarker = new maps.MarkerImage("img/public_pin.png", null, null, null, new google.maps.Size(24, 24));
             friendMarker = new maps.MarkerImage("img/friend_pin.png", null, null, null, new google.maps.Size(24, 36));
@@ -89,7 +84,7 @@ angular.module('starter.controllers', [])
               options: { draggable: false }
             };
 
-            $http.get('http://107.170.215.238/movemento/?user_id=2')
+            $http.get('http://107.170.215.238/movemento/?user_id='+userID)
                 .success(function (data) {
                     console.log(data);
                     for (var momentIndex = 0; momentIndex < data.length; momentIndex += 1) {
@@ -205,6 +200,19 @@ angular.module('starter.controllers', [])
                 }
             }
         });
+    $scope.$watch(
+      function() {
+        return $scope.map;
+      }, 
+      function(nv, ov) {
+      // Only need to regenerate once
+        if (!ov.southwest && nv.southwest) {
+          // markerClickInit();
+          // $scope.preloader = false;
+          console.log('WATCHING');
+          $scope.studioMarkers = markers;
+        };
+      }, true);
 
     })
 
@@ -225,7 +233,7 @@ angular.module('starter.controllers', [])
         navigator.geolocation.getCurrentPosition(function (data) {
             console.log('data', data.coords.latitude);
             console.log('data', data.coords.longitude);
-
+            console.log("CALLIGN GEOLOCATION");
             $scope.form_data.latitude = data.coords.latitude;
             $scope.form_data.longitude = data.coords.longitude;
         })
