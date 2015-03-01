@@ -1,16 +1,35 @@
 angular.module('starter.controllers', [])
 
-    .controller('DashCtrl', function ($scope) {
+  .controller('DashCtrl', function ($scope) {
     })
 
 // LOGIN CONTROLLER HERE
-    .controller('LoginCtrl', function ($scope, userService, $state) {
+.controller('LoginCtrl', function ($scope, userService, $state) {
         $scope.login = function (id) {
             userService.login(id);
             $state.transitionTo('tab.account');
+          }
+})
 
-        }
-    })
+.controller('ChatsCtrl', function($scope, Chats) {
+  $scope.chats = Chats.all();
+  $scope.remove = function(chat) {
+    Chats.remove(chat);
+  }
+})
+
+.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+  $scope.chat = Chats.get($stateParams.chatId);
+})
+
+.controller('FriendsCtrl', function($scope, Friends) {
+  $scope.friends = Friends.all();
+})
+
+.controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
+  $scope.friend = Friends.get($stateParams.friendId);
+})
+
 
     .controller('ChatsCtrl', function ($scope, Chats) {
         $scope.chats = Chats.all();
@@ -55,11 +74,20 @@ angular.module('starter.controllers', [])
             $scope.googleVersion = maps.version;
             maps.visualRefresh = true;
 
-            charityMarker = new maps.MarkerImage("img/charity_pin.png", null, null, null, new google.maps.Size(24, 36));
-            publicMarker = new maps.MarkerImage("img/public_pin.png", null, null, null, new google.maps.Size(24, 36));
+            charityMarker = new maps.MarkerImage("img/charity_pin.png", null, null, null, new google.maps.Size(24, 24));
+            publicMarker = new maps.MarkerImage("img/public_pin.png", null, null, null, new google.maps.Size(24, 24));
             friendMarker = new maps.MarkerImage("img/friend_pin.png", null, null, null, new google.maps.Size(24, 36));
             personalMarker = new maps.MarkerImage("img/personal_pin.png", null, null, null, new google.maps.Size(24, 36));
-
+            indicatorMarker = new maps.MarkerImage("img/nav_dot.png", null, null, null, new google.maps.Size(20,20));
+            $scope.indicator = {
+              id: 0,
+              coords: {
+                latitude: 34.018357,
+                longitude: -118.486918
+              },
+              icon: indicatorMarker,
+              options: { draggable: false }
+            };
 
             $http.get('http://107.170.215.238/movemento/?user_id=2')
                 .success(function (data) {
@@ -80,7 +108,7 @@ angular.module('starter.controllers', [])
             var momentTitle;
             switch (moment.type) {
                 case 'gift':
-                    momentTitle = 'Some just left a gift moment! ';
+                    momentTitle = 'Someone just left a gift moment! ';
                     setMarker = charityMarker;
                     break;
                 case 'general':
@@ -222,6 +250,7 @@ angular.module('starter.controllers', [])
         $scope.$on('modal.hidden', function () {
             // Execute action
         });
+
         // Execute action on remove modal
         $scope.$on('modal.removed', function () {
             // Execute action
