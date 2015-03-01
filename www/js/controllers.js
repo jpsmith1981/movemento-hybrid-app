@@ -74,8 +74,8 @@ angular.module('starter.controllers', [])
             $scope.googleVersion = maps.version;
             maps.visualRefresh = true;
 
-            charityMarker = new maps.MarkerImage("img/charity_pin.png", null, null, null, new google.maps.Size(24, 36));
-            publicMarker = new maps.MarkerImage("img/public_pin.png", null, null, null, new google.maps.Size(24, 36));
+            charityMarker = new maps.MarkerImage("img/charity_pin.png", null, null, null, new google.maps.Size(24, 24));
+            publicMarker = new maps.MarkerImage("img/public_pin.png", null, null, null, new google.maps.Size(24, 24));
             friendMarker = new maps.MarkerImage("img/friend_pin.png", null, null, null, new google.maps.Size(24, 36));
             personalMarker = new maps.MarkerImage("img/personal_pin.png", null, null, null, new google.maps.Size(24, 36));
             indicatorMarker = new maps.MarkerImage("img/nav_dot.png", null, null, null, new google.maps.Size(20,20));
@@ -108,7 +108,7 @@ angular.module('starter.controllers', [])
             var momentTitle;
             switch (moment.type) {
                 case 'gift':
-                    momentTitle = 'Some just left a gift moment! ';
+                    momentTitle = 'Someone just left a gift moment! ';
                     setMarker = charityMarker;
                     break;
                 case 'general':
