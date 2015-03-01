@@ -8,15 +8,15 @@
   	<ion-content >
 		<div class="list card">
 		  <div class="item item-avatar">
-		    <img src="img/2.jpg">
+		    <img ng-src="img/{{movemento.user.id}}.jpg">
 		    <h2>Momento Message</h2>
-		    <p>Be fearless, because fear accomplishes nothing.</p>
+		    <p>{{movemento.note}}</p>
 		    <div class="item tabs tabs-secondary tabs-icon-left">
 		      <a class="tab-item" href="#/tab/account">
 		        <i class="icon ion-more"></i>
 		        12
 		      </a>
-		      <a class="tab-item assertive" href="#">
+		      <a class="tab-item" ng-class="{'assertive': liked}" href="#" ng-click="like()">
 		        <i class="icon ion-heart"></i>
 		        9
 		      </a>

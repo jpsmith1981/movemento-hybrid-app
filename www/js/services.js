@@ -1,3 +1,5 @@
+var api_url = "http://107.170.215.238/";
+
 angular.module('starter.services', [])
 
 .factory('Chats', function($http) {
@@ -109,13 +111,17 @@ angular.module('starter.services', [])
     return {
         post: function(data) {
             return $http.post('http://107.170.215.238/movemento/', data);
+        },
+
+        show: function(id) {
+            return $http.get(api_url + 'movemento/' + id);
         }
 
     }
 })
 
 
-.factory('user', function($http, $q) {
+.factory('userService', function($http, $q) {
 
     var user = null;
 
@@ -141,4 +147,32 @@ angular.module('starter.services', [])
 
 
     }
+})
+
+.factory('likeService', function($http, $q) {
+
+
+    return {
+        login: function(id) {
+            var defer = $q.defer();
+            $http.get('http://107.170.215.238/user/' + id)
+                .then(function(response){
+                    user = response.data;
+                    defer.resolve(response.data);
+                });
+
+            return defer.promise;
+        },
+
+        get: function(){
+            return user;
+        },
+
+        getId: function() {
+            return user.id;
+        }
+
+
+    }
 });
+

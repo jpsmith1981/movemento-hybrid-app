@@ -17,7 +17,6 @@
        <ui-gmap-marker ng-repeat="m in map.markers" coords="m" icon="m.icon" click="onMarkerClicked(m)" idKey="m.id" options="m.options">
                 <ui-gmap-window ng-cloak  coords="map.infoWindowWithCustomClass.coords" isIconVisibleOnClick="false" options="map.infoWindowWithCustomClass.options">
                       <p>{{m.title}} <a ng-href="#/moments/profile/{{m.id}}"> Check</a></p>
-                      <p><a href="#" ng-click="showPopup()">CLICK ME</a></p>
                 </ui-gmap-window>
             </ui-gmap-marker>
     </ui-gmap-google-map>
