@@ -30,7 +30,7 @@ angular.module('starter.controllers', [])
   $scope.friend = Friends.get($stateParams.friendId);
 })
 
-.controller('AccountCtrl', function($scope, $http, $ionicBackdrop, $ionicPopup, uiGmapGoogleMapApi) {
+.controller('AccountCtrl', function($scope, $http, $ionicBackdrop, $ionicPopup, $geolocation, uiGmapGoogleMapApi) {
     var markers = [],
     studioIndex,
     latlong = {},
@@ -41,34 +41,6 @@ angular.module('starter.controllers', [])
     friendMarker,
     personalMarker,
     markerIcon;
-
-  // $scope.showPopup = function() {
-  //   $scope.data = {}
-  //   console.log("CLICKED");
-  // // An elaborate, custom popup
-  //   var myPopup = $ionicPopup.show({
-  //   template: 'templates/moments/moment-profile.html',
-  //   // title: 'Moment',
-  //   subTitle: 'This moment was shared <span style="font-weight:bold;">1 min</span> ago.',
-  //   scope: $scope,
-  //   buttons: [
-  //     { text: 'Cancel' },
-  //     {
-  //       text: '<b>Save</b>',
-  //       type: 'button-positive',
-  //       // onTap: function(e) {
-  //       //   if (!$scope.data.wifi) {
-  //       //     //don't allow the user to close unless he enters wifi password
-  //       //     e.preventDefault();
-  //       //   } else {
-  //       //     return $scope.data.wifi;
-  //       //   }
-  //       // }
-  //     }
-  //   ]
-  //   });
-  //   $scope.$apply();
-  // };
 
   $scope.action = function() {
     console.log("ACTION");
@@ -163,6 +135,7 @@ angular.module('starter.controllers', [])
     $scope.$apply();
   };
 
+
   angular.extend($scope, {
     map: {
       disableDefaultUI: true,
@@ -203,6 +176,7 @@ angular.module('starter.controllers', [])
       }
     }
   });
+
 })
 
 .controller('MomentNote', function($scope, $stateParams, $ionicModal, Movemento, user, $state) {
@@ -222,6 +196,7 @@ angular.module('starter.controllers', [])
     navigator.geolocation.getCurrentPosition(function(data){
         console.log('data', data.coords.latitude);
         console.log('data', data.coords.longitude);
+        alert("lat: "+data.coords.latitude+' long: '+data.coords.longitude);
         $scope.form_data.latitude = data.coords.latitude;
         $scope.form_data.longitude = data.coords.longitude;
     })
