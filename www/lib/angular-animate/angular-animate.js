@@ -12,18 +12,18 @@
  * @name ngAnimate
  * @description
  *
- * The `ngAnimate` module provides support for JavaScript, CSS3 transition and CSS3 keyframe animation hooks within existing core and custom directives.
+ * The `ngAnimate` module provides support for JavaScript, CSS3 transition and CSS3 keyframe animation hooks within existing core and custom directives.js.
  *
  * <div doc-module-components="ngAnimate"></div>
  *
  * # Usage
  *
  * To see animations in action, all that is required is to define the appropriate CSS classes
- * or to register a JavaScript animation via the `myModule.animation()` function. The directives that support animation automatically are:
- * `ngRepeat`, `ngInclude`, `ngIf`, `ngSwitch`, `ngShow`, `ngHide`, `ngView` and `ngClass`. Custom directives can take advantage of animation
+ * or to register a JavaScript animation via the `myModule.animation()` function. The directives.js that support animation automatically are:
+ * `ngRepeat`, `ngInclude`, `ngIf`, `ngSwitch`, `ngShow`, `ngHide`, `ngView` and `ngClass`. Custom directives.js can take advantage of animation
  * by using the `$animate` service.
  *
- * Below is a more detailed breakdown of the supported animation events provided by pre-existing ng directives:
+ * Below is a more detailed breakdown of the supported animation events provided by pre-existing ng directives.js:
  *
  * | Directive                                                                                                | Supported Animations                                                     |
  * |----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
@@ -85,7 +85,7 @@
  * Angular will wait for two digest cycles until enabling animations. From there on, any animation-triggering
  * layout changes in the application will trigger animations as normal.
  *
- * In addition, upon bootstrap, if the routing system or any directives or load remote data (via $http) then Angular
+ * In addition, upon bootstrap, if the routing system or any directives.js or load remote data (via $http) then Angular
  * will automatically extend the wait time to enable animations once **all** of the outbound HTTP requests
  * are complete.
  *
@@ -169,7 +169,7 @@
  *
  * Class-based transitions refer to transition animations that are triggered when a CSS class is
  * added to or removed from the element (via `$animate.addClass`, `$animate.removeClass`,
- * `$animate.setClass`, or by directives such as `ngClass`, `ngModel` and `form`).
+ * `$animate.setClass`, or by directives.js such as `ngClass`, `ngModel` and `form`).
  * They are different when compared to structural animations since they **do not cancel existing
  * animations** nor do they **block successive transitions** from rendering on the same element.
  * This distinction allows for **multiple class-based transitions** to be performed on the same element.
@@ -630,7 +630,7 @@ angular.module('ngAnimate', ['ng'])
       }
 
       function animationRunner(element, animationEvent, className, options) {
-        //transcluded directives may sometimes fire an animation using only comment nodes
+        //transcluded directives.js may sometimes fire an animation using only comment nodes
         //best to catch this early on to prevent any animation operations from occurring
         var node = element[0];
         if (!node) {
@@ -805,7 +805,7 @@ angular.module('ngAnimate', ['ng'])
        * will examine any JavaScript-defined animations (which are defined by using the $animateProvider provider object)
        * as well as any CSS-defined animations against the CSS classes present on the element once the DOM operation is run.
        *
-       * The `$animate` service is used behind the scenes with pre-existing directives and animation with these directives
+       * The `$animate` service is used behind the scenes with pre-existing directives.js and animation with these directives.js
        * will work out of the box without any extra configuration.
        *
        * Requires the {@link ngAnimate `ngAnimate`} module to be installed.
@@ -1478,7 +1478,7 @@ angular.module('ngAnimate', ['ng'])
               /* only structural animations wait for reflow before removing an
                  animation, but class-based animations don't. An example of this
                  failing would be when a parent HTML tag has a ng-class attribute
-                 causing ALL directives below to skip animations during the digest */
+                 causing ALL directives.js below to skip animations during the digest */
               if (runner && runner.isClassBased) {
                 cleanup(element, className);
               } else {

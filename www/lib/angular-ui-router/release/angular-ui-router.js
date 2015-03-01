@@ -2494,7 +2494,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * @param {string|function=} stateConfig.template
    * <a id='template'></a>
    *   html template as a string or a function that returns
-   *   an html template as a string which should be used by the uiView directives. This property 
+   *   an html template as a string which should be used by the uiView directives.js. This property
    *   takes precedence over templateUrl.
    *   
    *   If `template` is a function, it will be called with the following parameters:
@@ -3909,7 +3909,7 @@ function $ViewDirectiveFill (  $compile,   $controller,   $state,   $interpolate
 }
 
 /**
- * Shared ui-view code for both directives:
+ * Shared ui-view code for both directives.js:
  * Given scope, element, and its attributes, return the view's name
  */
 function getUiViewName(scope, attrs, element, $interpolate) {
@@ -4116,7 +4116,7 @@ function $StateRefDirective($state, $timeout) {
  * </ul>
  * </pre>
  *
- * The class name is interpolated **once** during the directives link time (any further changes to the
+ * The class name is interpolated **once** during the directives.js link time (any further changes to the
  * interpolated value are ignored).
  *
  * Multiple classes may be specified in a space-separated format:

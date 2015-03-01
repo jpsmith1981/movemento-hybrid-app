@@ -2211,7 +2211,7 @@ not 1:1 in this setting.
 	- coords - will be the coordsKey to the marker value ie: to get the icon marker[coordsKey]
 
     - watches from IMarker reflect that the look up key for a value has changed and not the actual icon or coords itself
-    - actual changes to a model are tracked inside directives.api.model.MarkerModel
+    - actual changes to a model are tracked inside directives.js.api.model.MarkerModel
 */
 
 
