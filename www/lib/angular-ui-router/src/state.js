@@ -373,7 +373,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * @param {string|function=} stateConfig.template
    * <a id='template'></a>
    *   html template as a string or a function that returns
-   *   an html template as a string which should be used by the uiView directives. This property 
+   *   an html template as a string which should be used by the uiView directives.js. This property
    *   takes precedence over templateUrl.
    *   
    *   If `template` is a function, it will be called with the following parameters:

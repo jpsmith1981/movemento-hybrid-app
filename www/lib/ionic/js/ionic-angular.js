@@ -4163,7 +4163,7 @@ IonicModule
  * @description
  * Delegate for controlling scrollViews (created by
  * {@link ionic.directive:ionContent} and
- * {@link ionic.directive:ionScroll} directives).
+ * {@link ionic.directive:ionScroll} directives.js).
  *
  * Methods called directly on the $ionicScrollDelegate service will control all scroll
  * views.  Use the {@link ionic.service:$ionicScrollDelegate#$getByHandle $getByHandle}
@@ -4412,7 +4412,7 @@ IonicModule
    * @name $ionicSideMenuDelegate#$getByHandle
    * @param {string} handle
    * @returns `delegateInstance` A delegate instance that controls only the
-   * {@link ionic.directive:ionSideMenus} directives with `delegate-handle` matching
+   * {@link ionic.directive:ionSideMenus} directives.js with `delegate-handle` matching
    * the given handle.
    *
    * Example: `$ionicSideMenuDelegate.$getByHandle('my-handle').toggleLeft();`
@@ -4527,7 +4527,7 @@ IonicModule
    * @name $ionicSlideBoxDelegate#$getByHandle
    * @param {string} handle
    * @returns `delegateInstance` A delegate instance that controls only the
-   * {@link ionic.directive:ionSlideBox} directives with `delegate-handle` matching
+   * {@link ionic.directive:ionSlideBox} directives.js with `delegate-handle` matching
    * the given handle.
    *
    * Example: `$ionicSlideBoxDelegate.$getByHandle('my-handle').stop();`
@@ -4544,7 +4544,7 @@ IonicModule
  * Delegate for controlling the {@link ionic.directive:ionTabs} directive.
  *
  * Methods called directly on the $ionicTabsDelegate service will control all ionTabs
- * directives. Use the {@link ionic.service:$ionicTabsDelegate#$getByHandle $getByHandle}
+ * directives.js. Use the {@link ionic.service:$ionicTabsDelegate#$getByHandle $getByHandle}
  * method to control specific ionTabs instances.
  *
  * @usage
@@ -4591,7 +4591,7 @@ IonicModule
    * @name $ionicTabsDelegate#$getByHandle
    * @param {string} handle
    * @returns `delegateInstance` A delegate instance that controls only the
-   * {@link ionic.directive:ionTabs} directives with `delegate-handle` matching
+   * {@link ionic.directive:ionTabs} directives.js with `delegate-handle` matching
    * the given handle.
    *
    * Example: `$ionicTabsDelegate.$getByHandle('my-handle').select(0);`
@@ -5710,7 +5710,7 @@ IonicModule
    * @name $ionicListDelegate#$getByHandle
    * @param {string} handle
    * @returns `delegateInstance` A delegate instance that controls only the
-   * {@link ionic.directive:ionList} directives with `delegate-handle` matching
+   * {@link ionic.directive:ionList} directives.js with `delegate-handle` matching
    * the given handle.
    *
    * Example: `$ionicListDelegate.$getByHandle('my-handle').showReorder(true);`
@@ -6247,7 +6247,7 @@ function($scope, $element, $attrs, $compile, $controller, $ionicNavBarDelegate, 
 
     // Find the details of the parent view directive (if any) and use it
     // to derive our own qualified view name, then hang our own details
-    // off the DOM so child directives can find it.
+    // off the DOM so child directives.js can find it.
     var parent = $element.parent().inheritedData('$uiView');
     var parentViewName = ((parent && parent.state) ? parent.state.name : '');
     if (navViewName.indexOf('@') < 0) navViewName  = navViewName + '@' + parentViewName;
@@ -6516,7 +6516,7 @@ function($scope, scrollViewOptions, $timeout, $window, $location, $document, $io
   var $element = self.$element = jqLite(element);
   var scrollView = self.scrollView = new ionic.views.Scroll(scrollViewOptions);
 
-  //Attach self to element as a controller so other directives can require this controller
+  //Attach self to element as a controller so other directives.js can require this controller
   //through `require: '$ionicScroll'
   //Also attach to parent so that sibling elements can require this
   ($element.parent().length ? $element.parent() : $element)
@@ -7525,7 +7525,7 @@ IonicModule
  * 4. Each collection-repeat list will take up all of its parent scrollView's space.
  * If you wish to have multiple lists on one page, put each list within its own
  * {@link ionic.directive:ionScroll ionScroll} container.
- * 5. You should not use the ng-show and ng-hide directives on your ion-content/ion-scroll elements that
+ * 5. You should not use the ng-show and ng-hide directives.js on your ion-content/ion-scroll elements that
  * have a collection-repeat inside.  ng-show and ng-hide apply the `display: none` css rule to the content's
  * style, causing the scrollView to read the width and height of the content as 0.  Resultingly,
  * collection-repeat will render elements that have just been un-hidden incorrectly.
@@ -8714,7 +8714,7 @@ IonicModule
   return {
     restrict: 'E',
     require: ['^ionItem', '^?ionList'],
-    //Run before anything else, so we can move it before other directives process
+    //Run before anything else, so we can move it before other directives.js process
     //its location (eg ngIf relies on the location of the directive in the dom)
     priority: Number.MAX_VALUE,
     compile: function($element, $attr) {
@@ -9012,7 +9012,7 @@ function keyboardAttachGetClientHeight(element) {
 * element. The containing element requires the `list` class and each list item requires
 * the `item` class.
 *
-* However, using the ionList and ionItem directives make it easy to support various
+* However, using the ionList and ionItem directives.js make it easy to support various
 * interaction modes such as swipe to edit, drag to reorder, and removing items.
 *
 * Related: {@link ionic.directive:ionItem}, {@link ionic.directive:ionOptionButton}
@@ -10394,7 +10394,7 @@ IonicModule
  *
  * @description
  * A container for the main visible content, sibling to one or more
- * {@link ionic.directive:ionSideMenu} directives.
+ * {@link ionic.directive:ionSideMenu} directives.js.
  *
  * @usage
  * ```html
@@ -10631,7 +10631,7 @@ IonicModule
  * @usage
  * To use side menus, add an `<ion-side-menus>` parent element,
  * an `<ion-side-menu-content>` for the center content,
- * and one or more `<ion-side-menu>` directives.
+ * and one or more `<ion-side-menu>` directives.js.
  *
  * ```html
  * <ion-side-menus>
