@@ -100,9 +100,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: 'AccountCtrl'
       }
     }
+  })
+  .state('moments', {
+    url: '/moments',
+    abstract: true,
+    templateUrl: 'templates/moments/moments.html'
+  })
+  .state('moments.create', {
+    url: '/create',
+    views: {
+      'moments': {
+        templateUrl: 'templates/moments/create.html',
+        controller: 'AccountCtrl'
+      }
+    }
+  })
+    .state('moments.note', {
+    url: '/note',
+    views: {
+      'moments': {
+        templateUrl: 'templates/moments/note.html',
+        controller: 'MomentNote'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/account');
 
 });
